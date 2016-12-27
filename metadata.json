@@ -3,10 +3,10 @@
   "version": "1.0.2",
   "author": "kogitoapp",
   "summary": "Manage timezone settings with Puppet",
-  "license": "MIT",
-  "source": "https://scratch.kogitoapp.com/puppet/puppet-timezone.git",
-  "project_page": "https://scratch.kogitoapp.com/puppet/puppet-timezone",
-  "issues_url": "https://scratch.kogitoapp.com/puppet/puppet-timezone/issues",
+  "license": "Apache-2.0",
+  "source": "https://github.com/kogitoapp/puppet-timezone.git",
+  "project_page": "https://github.com/kogitoapp/puppet-timezone",
+  "issues_url": "https://github.com/kogitoapp/puppet-timezone/issues",
   "tags": [
     "timezone",
     "linux"
