@@ -1,3 +1,9 @@
+## 2016-12-27 Release 1.0.4
+
+### Bug fixes
+
+*   Enable code coverage reports to [Coveralls](https://coveralls.io/github/kogitoapp/puppet-timezone).
+
 ## 2016-12-27 Release 1.0.3
 
 ### Bug fixes

@@ -24,6 +24,7 @@ vendor/*
 .vagrant/*
 
 ## Misc. generated files
+coverage/*
 doc/*
 pkg/*
 .yardoc/*

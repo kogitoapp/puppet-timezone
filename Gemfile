@@ -1,22 +1,22 @@
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
 def location_for(place, fake_version = nil)
-  if place =~ /^(git[:@][^#]*)#(.*)/
-    [fake_version, { :git => $1, :branch => $2, :require => false }].compact
-  elsif place =~ /^file:\/\/(.*)/
-    ['>= 0', { :path => File.expand_path($1), :require => false }]
-  else
-    [place, { :require => false }]
-  end
+    if place =~ /^(git[:@][^#]*)#(.*)/
+        [fake_version, { :git => $1, :branch => $2, :require => false }].compact
+    elsif place =~ /^file:\/\/(.*)/
+        ['>= 0', { :path => File.expand_path($1), :require => false }]
+    else
+        [place, { :require => false }]
+    end
 end
 
 # rspec must be v2 for ruby 1.8.7
 if RUBY_VERSION >= '1.8.7' && RUBY_VERSION < '1.9'
-  gem 'rake', '~> 10.0'
-  gem 'rspec', '~> 2.0'
+    gem 'rake', '~> 10.0'
+    gem 'rspec', '~> 2.0'
 else
-  # rubocop requires ruby >= 1.9
-  gem 'rubocop'
+    # rubocop requires ruby >= 1.9
+    gem 'rubocop'
 end
 
 group :test do
@@ -44,20 +44,20 @@ end
 group :development do
     gem 'travis',                                                       :require => false
     gem 'travis-lint',                                                  :require => false
-  gem 'guard-rake',                                                     :require => false
+    gem 'guard-rake',                                                     :require => false
 end
 
 group :system_tests do
-  if beaker_version = ENV['BEAKER_VERSION']
-    gem 'beaker', *location_for(beaker_version)
-  end
-  if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
-    gem 'beaker-rspec', *location_for(beaker_rspec_version)
-  else
-    gem 'beaker-rspec',                                                 :require => false
-  end
-  gem 'serverspec',                                                     :require => false
-  gem 'beaker-puppet_install_helper',                                   :require => false
+    if beaker_version = ENV['BEAKER_VERSION']
+        gem 'beaker', *location_for(beaker_version)
+    end
+    if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
+        gem 'beaker-rspec', *location_for(beaker_rspec_version)
+    else
+        gem 'beaker-rspec',                                                 :require => false
+    end
+    gem 'serverspec',                                                     :require => false
+    gem 'beaker-puppet_install_helper',                                   :require => false
 end
 
 ENV['FACTER_GEM_VERSION'].nil? ? facterversion = '~> 2.4' : facterversion = ENV['FACTER_GEM_VERSION'].to_s
