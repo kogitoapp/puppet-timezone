@@ -1,48 +1,65 @@
 # Class: timezone
 # ===========================
 #
-# Full description of class timezone here.
+# Manages timezone settings on various Linux/BSD operating systems.
 #
 # Parameters
 # ----------
 #
-# Document parameters here.
+# * `timezone`
+# Name of the desired timezone. By default we assume "UTC" here. Available
+# timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 #
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
-#
-# Variables
-# ----------
-#
-# Here you should define a list of variables that this module would require.
-#
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
+# * `hw_utc`
+# Is the hardware clock set to UTC? By default we assume `true`
 #
 # Examples
 # --------
 #
 # @example
 #    class { 'timezone':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#      timezone => 'America/New_York',
+#      hw_utc   => false,
 #    }
 #
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Daniel S. Reichenbach <daniel@kogitoapp.com>
 #
 # Copyright
 # ---------
 #
-# Copyright 2016 Your name here, unless otherwise noted.
+# Copyright 2016 Daniel S. Reichenbach <https://kogitoapp.com>
 #
-class timezone {
+class timezone (
+  $timezone                = $timezone::params::timezone,
+  $hw_utc                  = $timezone::params::hw_utc,
 
+  $package_ensure          = $timezone::params::package_ensure,
+  $package_name            = $timezone::params::package_name,
+  $package_provider        = $timezone::params::package_provider,
+  $package_install_options = $timezone::params::package_install_options,
+  $manage_package          = $timezone::params::manage_package,
 
+  $zoneinfo_dir            = $timezone::params::zoneinfo_dir,
+  $localtime_file          = $timezone::params::localtime_file,
+  $timezone_file           = $timezone::params::timezone_file,
+  $timezone_file_template  = $timezone::params::timezone_file_template,
+  $timezone_file_comments  = $timezone::params::timezone_file_comments,
+  $timezone_update         = $timezone::params::timezone_update,
+  ) inherits timezone::params {
+
+  class { '::timezone::install':
+    package_install_options => $package_install_options,
+  }
+
+  class { '::timezone::config': }
+
+  anchor { 'timezone::begin': }
+  anchor { 'timezone::end': }
+
+  Anchor['timezone::begin'] ->
+  Class['timezone::install'] ->
+  Class['timezone::config']
 }

@@ -1,36 +1,35 @@
 # Class: timezone::config
 # ===========================
 #
-# Full description of class timezone here.
+# Applies configuration for `::timezone` class to system.
 #
 # Parameters
 # ----------
 #
-# Document parameters here.
+# * `timezone`
+# Name of the desired timezone.
 #
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
+# * `hw_utc`
+# Is the hardware clock set to UTC?
 #
-# Variables
-# ----------
+# * `zoneinfo_dir`
+# Path to directory where timezone information is stored.
 #
-# Here you should define a list of variables that this module would require.
+# * `localtime_file`
+# The file which will be symlinked to the actual timezone file in the timezone
+# information directory.
 #
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
+# * `timezone_file`
+# Some operating systems stored timezone in this file with additional settings.
 #
-# Examples
-# --------
+# * `timezone_file_template`
+# If using a `timezone_file`, a template for the files' content can be used.
 #
-# @example
-#    class { 'timezone':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
-#    }
+# * `timezone_file_comments`
+# If the timezone file supports comments.
+#
+# * `timezone_update`
+# Signals if an update to the timezone requires execution of an update command.
 #
 # Authors
 # -------
@@ -42,7 +41,53 @@
 #
 # Copyright 2016 Daniel S. Reichenbach <https://kogitoapp.com>
 #
-class timezone::config {
+class timezone::config (
+  $timezone               = $timezone::timezone,
+  $hw_utc                 = $timezone::hw_utc,
+  $package_ensure         = $timezone::package_ensure,
+  $zoneinfo_dir           = $timezone::zoneinfo_dir,
+  $localtime_file         = $timezone::localtime_file,
+  $timezone_file          = $timezone::timezone_file,
+  $timezone_file_template = $timezone::timezone_file_template,
+  $timezone_file_comments = $timezone::timezone_file_comments,
+  $timezone_update        = $timezone::timezone_update,
+  ) {
 
+  case $package_ensure {
+    /(latest)/: {
+      $localtime_ensure = 'file'
+      $timezone_ensure  = 'file'
+    }
+    /(present)/: {
+      $localtime_ensure = 'file'
+      $timezone_ensure  = 'file'
+    }
+    /(absent)/: {
+      $localtime_ensure = 'absent'
+      $timezone_ensure  = 'absent'
+    }
+    default: {
+      fail('`package_ensure` parameter must be latest, present or absent')
+    }
+  }
 
+  file { $localtime_file:
+    ensure => $localtime_ensure,
+    source => "file://${zoneinfo_dir}${timezone}",
+  }
+
+  if $timezone_file != false and $timezone_file_template != '' {
+    file { $timezone_file:
+        ensure  => $timezone_ensure,
+        content => template($timezone_file_template),
+    }
+  }
+
+  if $timezone_update != false and $localtime_ensure != 'absent'{
+    exec { 'update_timezone':
+      command     => $timezone_update,
+      path        => '/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
+      refreshonly => true,
+    }
+  }
 }

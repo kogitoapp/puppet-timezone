@@ -1,83 +1,169 @@
-# timezone
+# puppet-timezone
 
-#### Table of Contents
-
-1. [Description](#description)
-1. [Setup - The basics of getting started with timezone](#setup)
-    * [What timezone affects](#what-timezone-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with timezone](#beginning-with-timezone)
-1. [Usage - Configuration options and additional functionality](#usage)
-1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-1. [Limitations - OS compatibility, etc.](#limitations)
-1. [Development - Guide for contributing to the module](#development)
+[![Build Status][build-shield]][build-status]
+[![Code Coverage][coverage-shield]][coverage-status]
+[![Puppet Forge][forge-shield]][forge-timezone]
+[![Puppet Forge - downloads][forge-shield-dl]][forge-timezone]
+[![Puppet Forge - scores][forge-shield-sc]][forge-timezone]
 
 ## Description
 
-Start with a one- or two-sentence summary of what the module does and/or what
-problem it solves. This is your 30-second elevator pitch for your module.
-Consider including OS/Puppet version it works with.
-
-You can give more descriptive information in a second paragraph. This paragraph
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?" If your module has a range of functionality (installation, configuration,
-management, etc.), this is the time to mention it.
+A Puppet module for managing timezone settings. This module allows you to
+install and configure timezone settings using operating system specific
+facilities with just a single parameter.
 
 ## Setup
 
-### What timezone affects **OPTIONAL**
+### What timezone affects
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
-
-If there's more that they should know about, though, this is the place to mention:
-
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section
-here.
+*   Locale timezone configuration file. For all supported systems this is
+    `/etc/localtime`.
+*   The timezone configuration file. Depending on the operating system this can
+    be:
+    *   `/etc/timezone` for the **Debian/Ubuntu** operating system family,
+    *   `/etc/sysconfig/clock` for **CentOS/RedHat** operating system family
+        below version **7**,
+*   For **Debian/Ubuntu**, **CentOS/RedHat** operating system families it will
+    install the `tzdata` package.
+*   `puppet-timezone` depends on
+    *   [puppetlabs-stdlib][puppetlabs-stdlib],
+    *   [puppet-yum][puppet-yum],
+    *   [puppetlabs-apt][puppetlabs-apt],
+    *   [stm-debconf][stm-debconf],
 
 ### Beginning with timezone
 
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most
-basic use of the module.
+The simplest use case is to rely on the Coordinated Universal Timezone. This can
+be done by simply including the class:
+
+```puppet
+include ::timezone
+```
+
+Most of the time though you will be provisioning in specific regions of the
+world and thus may want to pass a timezone:
+
+```puppet
+class { '::timezone':
+    timezone => 'Europe/Berlin',
+}
+```
+
+A list of valid timezone strings is available on [Wikipedia][valid-timezones].
 
 ## Usage
 
-This section is where you describe how to customize, configure, and do the
-fancy stuff with your module here. It's especially helpful if you include usage
-examples and code samples for doing things with your module.
+In addition to configuring the timezone you can also modify and customize
+related settings such as if the hardware clock is set to UTC, or inject your
+own zone information or even package.
+
+```puppet
+class { '::timezone':
+    timezone => 'Europe/Berlin',
+    package_ensure => 'present',
+    manage_package => true,
+}
+```
 
 ## Reference
 
-Here, include a complete list of your module's classes, types, providers,
-facts, along with the parameters for each. Users refer to this section (thus
-the name "Reference") to find specific details; most users don't read it per
-se.
+### Class: `timezone`
+
+```puppet
+class { 'timezone':
+    timezone                => 'Etc/UTC',
+    hw_utc                  => true,
+
+    package_ensure          => 'present',
+    package_name            => 'tzdata',
+    package_provider        => 'apt',
+    package_install_options => [],
+    manage_package          => true,
+
+    zoneinfo_dir           => '/usr/share/zoneinfo',
+    localtime_file         => '/etc/localtime',
+    timezone_file          => '/etc/timezone',
+    timezone_file_template => 'timezone/debian-timezone.erb',
+    timezone_file_comments => false,
+    timezone_update        => false,
+}
+```
+
+### Class: `timezone::params`
+
+```puppet
+class { 'timezone::params':
+    timezone                => 'Etc/UTC',
+    hw_utc                  => true,
+    package_ensure          => 'latest',
+    package_install_options => [],
+    manage_package          => true,
+}
+```
+
+### Class: `timezone::install`
+
+```puppet
+class { 'timezone::install':
+    package_ensure          => 'present',
+    package_name            => 'tzdata',
+    package_provider        => 'apt',
+    package_install_options => [],
+    manage_package          => true,
+}
+```
+
+### Class: `timezone::config`
+
+```puppet
+class { 'timezone::config':
+    timezone               => 'Europe/Berlin',
+    hw_utc                 => true,
+    package_ensure         => 'present',
+    zoneinfo_dir           => '/usr/share/zoneinfo',
+    localtime_file         => '/etc/localtime',
+    timezone_file          => '/etc/timezone',
+    timezone_file_template => 'timezone/debian-timezone.erb',
+    timezone_file_comments => false,
+    timezone_update        => false,
+}
+```
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc. If there
-are Known Issues, you might want to include them under their own heading here.
+See [metadata.json](metadata.json) for supported platforms
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+### Running tests
 
-## Release Notes/Contributors/Etc. **Optional**
+This project contains tests for [rspec-puppet][puppet-rspec].
 
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel
-are necessary or important to include here. Please use the `## ` header.
+Quickstart:
+
+```bash
+$ gem install bundler
+$ bundle install
+$ bundle exec rake lint
+$ bundle exec rake validate
+$ bundle exec rake test
+```
+
+When submitting pull requests, please make sure that module documentation,
+test cases and syntax checks pass.
+
+[puppetlabs-stdlib]: https://github.com/puppetlabs/puppetlabs-stdlib
+[puppetlabs-apt]: https://github.com/puppetlabs/puppetlabs-apt
+[puppet-yum]: https://github.com/voxpupuli/puppet-yum
+[stm-debconf]: https://github.com/smoeding/puppet-debconf
+[valid-timezones]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[puppet-rspec]: http://rspec-puppet.com/
+
+[build-status]: https://travis-ci.org/kogitoapp/puppet-timezone
+[build-shield]: https://travis-ci.org/kogitoapp/puppet-timezone.png?branch=master
+[coverage-shield]: https://coveralls.io/repos/github/kogitoapp/puppet-timezone/badge.svg?branch=master
+[coverage-status]: https://coveralls.io/github/kogitoapp/puppet-timezone
+[forge-timezone]: https://forge.puppetlabs.com/kogitoapp/timezone
+[forge-shield]: https://img.shields.io/puppetforge/v/kogitoapp/timezone.svg
+[forge-shield-dl]: https://img.shields.io/puppetforge/dt/kogitoapp/timezone.svg
+[forge-shield-sc]: https://img.shields.io/puppetforge/f/kogitoapp/timezone.svg
