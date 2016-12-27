@@ -10,6 +10,15 @@ def location_for(place, fake_version = nil)
   end
 end
 
+# rspec must be v2 for ruby 1.8.7
+if RUBY_VERSION >= '1.8.7' && RUBY_VERSION < '1.9'
+  gem 'rake', '~> 10.0'
+  gem 'rspec', '~> 2.0'
+else
+  # rubocop requires ruby >= 1.9
+  gem 'rubocop'
+end
+
 group :test do
     gem 'puppetlabs_spec_helper', '~> 1.2.2',                           :require => false
     gem 'rspec-puppet', '~> 2.5',                                       :require => false
