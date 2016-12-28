@@ -16,7 +16,7 @@ describe 'timezone::install', type: :class do
             package_provider: options[:package_provider],
             package_install_options: [],
             manage_package: true,
-            localtime_file: options[:localtime_file]
+            timezone: options[:default_timezone],
           }
         end
 
@@ -32,10 +32,12 @@ describe 'timezone::install', type: :class do
               package_provider: 'apt',
               package_install_options: [],
               manage_package: true,
-              localtime_file: options[:localtime_file]
+              timezone: options[:default_timezone],
             }
           end
 
+          it { is_expected.to contain_debconf('update_debconf area') }
+          it { is_expected.to contain_debconf('update_debconf zone') }
           it { is_expected.to contain_package('tzdata').with(provider: 'apt') }
         end
       end
@@ -49,7 +51,7 @@ describe 'timezone::install', type: :class do
               package_provider: 'yum',
               package_install_options: [],
               manage_package: true,
-              localtime_file: options[:localtime_file]
+              timezone: options[:default_timezone],
             }
           end
 

@@ -22,6 +22,9 @@
 # * `manage_package`
 # Manage timezone packages automatically.
 #
+# * `timezone`
+# Name of the desired timezone.
+#
 # Authors
 # -------
 #
@@ -38,7 +41,7 @@ class timezone::install (
   $package_provider        = $timezone::package_provider,
   $package_install_options = $timezone::package_install_options,
   $manage_package          = $timezone::manage_package,
-  $localtime_file          = $timezone::localtime_file,
+  $timezone                = $timezone::timezone,
 ) {
 
   case $package_ensure {
@@ -61,9 +64,25 @@ class timezone::install (
   }
 
   if $manage_package {
+    if $package_tzdata_ensure == 'present' and $::osfamily == 'Debian' {
+      $_area = split($timezone, '/')
+      $area = $_area[0]
+      $_zone = split($timezone, '/')
+      $zone = $_zone[1]
+      debconf { 'update_debconf area':
+        item  => 'tzdata/Areas',
+        type  => 'select',
+        value => $area,
+      }
+      debconf { 'update_debconf zone':
+        item  => "tzdata/Zones/${area}",
+        type  => 'select',
+        value => $zone,
+      }
+    }
+
     package { $package_name:
       ensure          => $package_tzdata_ensure,
-      before          => File[$localtime_file],
       provider        => $package_provider,
       install_options => $package_install_options,
     }

@@ -111,6 +111,7 @@ class { 'timezone::install':
     package_provider        => 'apt',
     package_install_options => [],
     manage_package          => true,
+    timezone                => 'Etc/UTC',
 }
 ```
 
