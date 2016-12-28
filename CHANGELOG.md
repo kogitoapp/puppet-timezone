@@ -1,3 +1,17 @@
+## (NYR) Release 1.1.0
+
+### New features
+
+*   Integrate [stm-debconf](https://github.com/smoeding/puppet-debconf) for
+    Debian operating system family.
+
+## (NYR) Release 1.0.5
+
+### Maintenance
+
+*   Added required Puppet Open Source and Puppet Enterprise versions. Rule of
+    thumb: if it supports Puppet 4.0 language features, it has to run.
+
 ## 2016-12-27 Release 1.0.4
 
 ### Bug fixes

@@ -1,6 +1,6 @@
 {
   "name": "kogitoapp-timezone",
-  "version": "1.1.0",
+  "version": "1.0.5",
   "author": "kogitoapp",
   "summary": "Manage timezone settings with Puppet",
   "license": "Apache-2.0",
@@ -62,6 +62,16 @@
     {
       "name": "stm-debconf",
       "version_requirement": ">= 1.0.0 < 2.0.0"
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": ">= 2015.2.0 <= 2016.5.0"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.0.0 < 5.0.0"
     }
   ],
   "data_provider": "none"
