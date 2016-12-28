@@ -82,6 +82,7 @@ class { 'timezone':
 
     zoneinfo_dir           => '/usr/share/zoneinfo',
     localtime_file         => '/etc/localtime',
+    localtime_file_type    => 'file',
     timezone_file          => '/etc/timezone',
     timezone_file_template => 'timezone/debian-timezone.erb',
     timezone_file_comments => false,
@@ -122,6 +123,7 @@ class { 'timezone::config':
     package_ensure         => 'present',
     zoneinfo_dir           => '/usr/share/zoneinfo',
     localtime_file         => '/etc/localtime',
+    localtime_file_type    => 'file',
     timezone_file          => '/etc/timezone',
     timezone_file_template => 'timezone/debian-timezone.erb',
     timezone_file_comments => false,

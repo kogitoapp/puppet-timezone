@@ -44,6 +44,7 @@ class timezone (
 
   $zoneinfo_dir            = $timezone::params::zoneinfo_dir,
   $localtime_file          = $timezone::params::localtime_file,
+  $localtime_file_type     = $timezone::params::localtime_file_type,
   $timezone_file           = $timezone::params::timezone_file,
   $timezone_file_template  = $timezone::params::timezone_file_template,
   $timezone_file_comments  = $timezone::params::timezone_file_comments,

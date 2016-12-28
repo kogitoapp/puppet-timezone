@@ -27,8 +27,7 @@ describe 'timezone', type: :class do
         it { is_expected.to contain_class('timezone::config') }
         it do
           is_expected.to contain_file(options[:localtime_file]).with(
-            ensure: 'file',
-            source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone]
+            ensure: options[:localtime_file_type],
           )
         end
       end

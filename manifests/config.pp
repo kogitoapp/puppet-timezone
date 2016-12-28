@@ -16,8 +16,11 @@
 # Path to directory where timezone information is stored.
 #
 # * `localtime_file`
-# The file which will be symlinked to the actual timezone file in the timezone
-# information directory.
+# The file which will be symlinked or a copy of the actual timezone file in the
+# timezone information directory.
+#
+# * `localtime_file_type`
+# Determines if `localtime_file` will be a `file` or `link`.
 #
 # * `timezone_file`
 # Some operating systems stored timezone in this file with additional settings.
@@ -47,6 +50,7 @@ class timezone::config (
   $package_ensure         = $timezone::package_ensure,
   $zoneinfo_dir           = $timezone::zoneinfo_dir,
   $localtime_file         = $timezone::localtime_file,
+  $localtime_file_type    = $timezone::localtime_file_type,
   $timezone_file          = $timezone::timezone_file,
   $timezone_file_template = $timezone::timezone_file_template,
   $timezone_file_comments = $timezone::timezone_file_comments,
@@ -71,9 +75,22 @@ class timezone::config (
     }
   }
 
-  file { $localtime_file:
-    ensure => $localtime_ensure,
-    source => "file://${zoneinfo_dir}${timezone}",
+  if $localtime_ensure == 'absent' {
+    file { $localtime_file:
+      ensure => $localtime_ensure,
+    }
+  } else {
+    if $localtime_file_type == 'file' {
+      file { $localtime_file:
+        ensure => $localtime_file_type,
+        source => "file://${zoneinfo_dir}${timezone}",
+      }
+    } else {
+      file { $localtime_file:
+        ensure => $localtime_file_type,
+        target => "${zoneinfo_dir}${timezone}",
+      }
+    }
   }
 
   if $timezone_file != false and $timezone_file_template != '' {

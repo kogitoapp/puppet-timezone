@@ -16,21 +16,22 @@ describe 'timezone::config', type: :class do
             package_ensure: 'present',
             zoneinfo_dir: options[:zoneinfo_dir],
             localtime_file: options[:localtime_file],
+            localtime_file_type: options[:localtime_file_type],
             timezone_file: options[:timezone_file],
             timezone_file_template: options[:timezone_file_template],
             timezone_file_comments: options[:timezone_file_comments],
             timezone_update: options[:timezone_update]
           }
         end
-        it do
-          is_expected.to contain_file(options[:localtime_file]).with(
-            ensure: 'file',
-            source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone]
-          )
-        end
 
         context 'when :osfamily == "Debian"' do
           if facts[:osfamily] == 'Debian'
+            it do
+              is_expected.to contain_file(options[:localtime_file]).with(
+                ensure: options[:localtime_file_type],
+                source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone]
+              )
+            end
             it { is_expected.to contain_file(options[:timezone_file]).with_content(%r{Etc/UTC}) }
             it { is_expected.to contain_exec('update_timezone').with_command(%r{dpkg-reconfigure -f noninteractive tzdata}) }
           end
@@ -38,6 +39,12 @@ describe 'timezone::config', type: :class do
 
         context 'when RHEL <= 6' do
           if facts[:osfamily] == 'RedHat' && facts[:operatingsystemmajrelease] <= '6'
+            it do
+              is_expected.to contain_file(options[:localtime_file]).with(
+                ensure: options[:localtime_file_type],
+                source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone]
+              )
+            end
             it { is_expected.to contain_file(options[:timezone_file]).with_content(%r{ZONE="Etc/UTC"}) }
             it { is_expected.to contain_exec('update_timezone').with_command('tzdata-update') }
           end
@@ -45,6 +52,12 @@ describe 'timezone::config', type: :class do
 
         context 'when RHEL >= 7' do
           if facts[:osfamily] == 'RedHat' && facts[:operatingsystemmajrelease] >= '7'
+            it do
+              is_expected.to contain_file(options[:localtime_file]).with(
+                ensure: options[:localtime_file_type],
+                target: options[:zoneinfo_dir] + options[:default_timezone]
+              )
+            end
             it { is_expected.not_to contain_file(options[:timezone_file]).with_ensure('file') }
             it { is_expected.to contain_exec('update_timezone').with_command('timedatectl set-timezone Etc/UTC') }
           end
@@ -59,6 +72,7 @@ describe 'timezone::config', type: :class do
             package_ensure: 'absent',
             zoneinfo_dir: options[:zoneinfo_dir],
             localtime_file: options[:localtime_file],
+            localtime_file_type: options[:localtime_file_type],
             timezone_file: options[:timezone_file],
             timezone_file_template: options[:timezone_file_template],
             timezone_file_comments: options[:timezone_file_comments],
@@ -77,6 +91,7 @@ describe 'timezone::config', type: :class do
             package_ensure: 'present',
             zoneinfo_dir: options[:zoneinfo_dir],
             localtime_file: options[:localtime_file],
+            localtime_file_type: options[:localtime_file_type],
             timezone_file: options[:timezone_file],
             timezone_file_template: options[:timezone_file_template],
             timezone_file_comments: options[:timezone_file_comments],
@@ -84,11 +99,21 @@ describe 'timezone::config', type: :class do
           }
         end
 
-        it do
-          is_expected.to contain_file(options[:localtime_file]).with(
-            ensure: 'file',
-            source: 'file://' + options[:zoneinfo_dir] + 'Europe/Berlin'
-          )
+        if options[:localtime_file_type] == 'file'
+          it do
+            is_expected.to contain_file(options[:localtime_file]).with(
+              ensure: options[:localtime_file_type],
+              source: 'file://' + options[:zoneinfo_dir] + 'Europe/Berlin'
+            )
+          end
+        end
+        if options[:localtime_file_type] == 'link'
+          it do
+            is_expected.to contain_file(options[:localtime_file]).with(
+              ensure: options[:localtime_file_type],
+              target: options[:zoneinfo_dir] + 'Europe/Berlin'
+            )
+          end
         end
       end
     end

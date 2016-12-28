@@ -36,8 +36,11 @@
 # system specific path.
 #
 # * `localtime_file`
-# The file which will be symlinked to the actual timezone file in the timezone
-# information directory. Defaults to operating system default path.
+# The file which will be symlinked or a copy of the actual timezone file in the
+# timezone information directory. Defaults to operating system default path.
+#
+# * `localtime_file_type`
+# Determines if `localtime_file` will be a `file` or `link`. Based on `osfamily`
 #
 # * `timezone_file`
 # Some operating systems stored timezone in this file with additional settings.
@@ -79,6 +82,7 @@ class timezone::params {
       $package_provider       = 'apt'
       $zoneinfo_dir           = '/usr/share/zoneinfo/'
       $localtime_file         = '/etc/localtime'
+      $localtime_file_type    = 'file'
       $timezone_file          = '/etc/timezone'
       $timezone_file_template = 'timezone/timezone.erb'
       $timezone_file_comments = false
@@ -91,12 +95,14 @@ class timezone::params {
       $localtime_file         = '/etc/localtime'
       case $::operatingsystemmajrelease {
         '7': {
+          $localtime_file_type    = 'link'
           $timezone_file          = false
           $timezone_file_template = false
           $timezone_file_comments = false
           $timezone_update        = "timedatectl set-timezone ${timezone}"
         }
         default: {
+          $localtime_file_type    = 'file'
           $timezone_file          = '/etc/sysconfig/clock'
           $timezone_file_template = 'timezone/clock.erb'
           $timezone_file_comments = false

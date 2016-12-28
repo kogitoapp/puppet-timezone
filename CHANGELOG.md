@@ -1,9 +1,9 @@
-## (NYR) Release 1.1.0
+## (NOT YET RELEASED) Release 1.1.0
 
 ### New features
 
-*   Integrate [stm-debconf](https://github.com/smoeding/puppet-debconf) for
-    Debian operating system family.
+*   Use file or link resources for `localtime` as expected on target `osfamily`.
+    This fixes [#2](https://github.com/kogitoapp/puppet-timezone/issues/2).
 
 ## (2016-12-28) Release 1.0.5
 
