@@ -9,6 +9,7 @@
 
 ### Maintenance
 
+*   Removed DEBUG mode for Beaker builds.
 *   Removed Ruby 2.4.0 build from Travis.
 *   Added required Puppet Open Source and Puppet Enterprise versions. Rule of
     thumb: if it supports Puppet 4.0 language features, it has to run.
