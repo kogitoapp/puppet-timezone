@@ -1,4 +1,10 @@
-## (NOT YET RELEASED) Release 1.1.0
+## (2017-02-15) Release 1.1.0
+
+### Maintenance
+
+*   Updated dependecy to puppet-yum 1.0.0
+
+## (2016-12-28) Release 1.1.0
 
 ### New features
 
