@@ -2,6 +2,7 @@
 
 ### Bug fixes
 
+*   Fixed Rubocop configuration
 *   Fixed wrong version in module metadata
 
 ## (2017-02-15) Release 1.1.1
