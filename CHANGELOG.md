@@ -1,3 +1,10 @@
+## (NOT YET RELEASED) Release 1.1.3
+
+### Bug fixes
+
+*   Fixed Rubocop offenses. Sorry, we offended you!
+    -   use `Security/Eval` instead of `Lint/Eval` check
+
 ## (2017-02-15) Release 1.1.2
 
 ### Bug fixes
