@@ -149,6 +149,7 @@ $ gem install bundler
 $ bundle install
 $ bundle exec rake lint
 $ bundle exec rake validate
+$ bundle exec rake rubocop
 $ bundle exec rake test
 ```
 
