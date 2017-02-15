@@ -3,6 +3,7 @@
 ### Bug fixes
 
 *   Fixed Rubocop offenses. Sorry, we offended you!
+    -   use `YAML.safe_load` instead of `YAML.load`
     -   use `Security/Eval` instead of `Lint/Eval` check
 
 ## (2017-02-15) Release 1.1.2
