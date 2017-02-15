@@ -8,7 +8,7 @@ describe 'timezone::config', type: :class do
       end
       options = os_specific_options(facts)
 
-      context 'with all defaults' do
+      context 'with all defaults when :osfamily == "Debian"' do
         let :params do
           {
             timezone: options[:default_timezone],
@@ -24,43 +24,71 @@ describe 'timezone::config', type: :class do
           }
         end
 
-        context 'when :osfamily == "Debian"' do
-          if facts[:osfamily] == 'Debian'
-            it do
-              is_expected.to contain_file(options[:localtime_file]).with(
-                ensure: options[:localtime_file_type],
-                source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone]
-              )
-            end
-            it { is_expected.to contain_file(options[:timezone_file]).with_content(%r{Etc/UTC}) }
-            it { is_expected.to contain_exec('update_timezone').with_command(%r{dpkg-reconfigure -f noninteractive tzdata}) }
+        if facts[:osfamily] == 'Debian'
+          it do
+            is_expected.to contain_file(options[:localtime_file]).with(
+              ensure: options[:localtime_file_type],
+              source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone]
+            )
           end
+          it { is_expected.to contain_file(options[:timezone_file]).with_content(%r{Etc/UTC}) }
+          it { is_expected.to contain_exec('update_timezone').with_command(%r{dpkg-reconfigure -f noninteractive tzdata}) }
+        end
+      end
+
+      context 'with all defaults when RHEL <= 6' do
+        let :params do
+          {
+            timezone: options[:default_timezone],
+            hw_utc: false,
+            package_ensure: 'present',
+            zoneinfo_dir: options[:zoneinfo_dir],
+            localtime_file: options[:localtime_file],
+            localtime_file_type: options[:localtime_file_type],
+            timezone_file: options[:timezone_file],
+            timezone_file_template: options[:timezone_file_template],
+            timezone_file_comments: options[:timezone_file_comments],
+            timezone_update: options[:timezone_update]
+          }
         end
 
-        context 'when RHEL <= 6' do
-          if facts[:osfamily] == 'RedHat' && facts[:operatingsystemmajrelease] <= '6'
-            it do
-              is_expected.to contain_file(options[:localtime_file]).with(
-                ensure: options[:localtime_file_type],
-                source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone]
-              )
-            end
-            it { is_expected.to contain_file(options[:timezone_file]).with_content(%r{ZONE="Etc/UTC"}) }
-            it { is_expected.to contain_exec('update_timezone').with_command('tzdata-update') }
+        if facts[:osfamily] == 'RedHat' && facts[:operatingsystemmajrelease] <= '6'
+          it do
+            is_expected.to contain_file(options[:localtime_file]).with(
+              ensure: options[:localtime_file_type],
+              source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone]
+            )
           end
+          it { is_expected.to contain_file(options[:timezone_file]).with_content(%r{ZONE="Etc/UTC"}) }
+          it { is_expected.to contain_exec('update_timezone').with_command('tzdata-update') }
+        end
+      end
+
+      context 'with all defaults when RHEL >= 7' do
+        let :params do
+          {
+            timezone: options[:default_timezone],
+            hw_utc: false,
+            package_ensure: 'present',
+            zoneinfo_dir: options[:zoneinfo_dir],
+            localtime_file: options[:localtime_file],
+            localtime_file_type: options[:localtime_file_type],
+            timezone_file: options[:timezone_file],
+            timezone_file_template: options[:timezone_file_template],
+            timezone_file_comments: options[:timezone_file_comments],
+            timezone_update: options[:timezone_update]
+          }
         end
 
-        context 'when RHEL >= 7' do
-          if facts[:osfamily] == 'RedHat' && facts[:operatingsystemmajrelease] >= '7'
-            it do
-              is_expected.to contain_file(options[:localtime_file]).with(
-                ensure: options[:localtime_file_type],
-                target: options[:zoneinfo_dir] + options[:default_timezone]
-              )
-            end
-            it { is_expected.not_to contain_file(options[:timezone_file]).with_ensure('file') }
-            it { is_expected.to contain_exec('update_timezone').with_command('timedatectl set-timezone Etc/UTC') }
+        if facts[:osfamily] == 'RedHat' && facts[:operatingsystemmajrelease] >= '7'
+          it do
+            is_expected.to contain_file(options[:localtime_file]).with(
+              ensure: options[:localtime_file_type],
+              target: options[:zoneinfo_dir] + options[:default_timezone]
+            )
           end
+          it { is_expected.not_to contain_file(options[:timezone_file]).with_ensure('file') }
+          it { is_expected.to contain_exec('update_timezone').with_command('timedatectl set-timezone Etc/UTC') }
         end
       end
 

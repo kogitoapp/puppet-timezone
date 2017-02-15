@@ -44,6 +44,7 @@ describe 'timezone', type: :class do
         end
         it { is_expected.to contain_package('timezone-awesomerrr').with_ensure('present') }
       end
+
       context 'when manage_package is false' do
         let :params do
           {
@@ -52,30 +53,29 @@ describe 'timezone', type: :class do
         end
         it { is_expected.not_to contain_package(options[:package]) }
       end
+
       context 'when manage_package is true' do
         let(:params) { { manage_package: true } }
         it { is_expected.to contain_package(options[:package]).with_ensure('present') }
       end
 
-      context 'with timezone::install::package_install_options' do
-        context 'set to a valid array' do
-          let :params do
-            { package_install_options: ['--nogpgcheck'] }
-          end
-
-          it { is_expected.to contain_package(options[:package]).with_install_options(['--nogpgcheck']) }
+      context 'setting timezone::install::package_install_options to a valid array' do
+        let :params do
+          { package_install_options: ['--nogpgcheck'] }
         end
 
-        context 'set to an invalid value (non-array)' do
-          let :params do
-            { package_install_options: 'not_an_array' }
-          end
+        it { is_expected.to contain_package(options[:package]).with_install_options(['--nogpgcheck']) }
+      end
 
-          it 'fails' do
-            expect do
-              is_expected.to contain_class('timezone')
-            end.to raise_error(Puppet::Error, %r{is not an Array})
-          end
+      context 'setting timezone::install::package_install_options to an invalid value (non-array)' do
+        let :params do
+          { package_install_options: 'not_an_array' }
+        end
+
+        it 'fails' do
+          expect do
+            is_expected.to contain_class('timezone')
+          end.to raise_error(Puppet::Error, %r{is not an Array})
         end
       end
     end
