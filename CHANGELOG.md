@@ -1,4 +1,4 @@
-## (NOT YET RELEASED) Release 1.1.5
+## (2017-03-23) Release 1.1.5
 
 ### Bug fixes
 
