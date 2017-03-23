@@ -1,3 +1,9 @@
+## (2017-03-23) Release 1.1.4
+
+### Bug fixes
+
+*   Fixed deprecation warning about `data_provider`.
+
 ## (2017-02-15) Release 1.1.3
 
 ### Bug fixes
