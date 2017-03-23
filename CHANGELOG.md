@@ -1,3 +1,9 @@
+## (NOT YET RELEASED) Release 1.1.5
+
+### Bug fixes
+
+*   Removed unsupported "pe" version requirement.
+
 ## (2017-03-23) Release 1.1.4
 
 ### Bug fixes
