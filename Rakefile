@@ -40,9 +40,9 @@ task :validate do
   end
 end
 
-desc 'Run metadata_lint, lint, validate, and spec tests.'
+desc 'Run metadata_lint, lint, rubocop, validate, and spec tests.'
 task :test do
-  [:metadata_lint, :lint, :validate, :spec].each do |test|
+  [:metadata_lint, :lint, :rubocop, :validate, :spec].each do |test|
     Rake::Task[test].invoke
   end
 end

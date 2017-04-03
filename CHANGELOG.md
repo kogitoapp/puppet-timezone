@@ -1,3 +1,9 @@
+## (NOT YET RELEASE) Release 1.2.0
+
+### Maintenance
+
+*   Updated `rake test` to run all checks
+
 ## (2017-03-23) Release 1.1.5
 
 ### Bug fixes
