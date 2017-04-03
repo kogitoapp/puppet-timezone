@@ -11,6 +11,6 @@ fixtures:
       ref: 'v0.9.15'
     debconf:
       repo: 'git://github.com/smoeding/puppet-debconf'
-      ref: 'v1.0.1'
+      ref: 'v2.0.0'
   symlinks:
     timezone: "#{source_dir}"
