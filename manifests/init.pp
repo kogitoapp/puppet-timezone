@@ -60,7 +60,7 @@ class timezone (
   anchor { 'timezone::begin': }
   anchor { 'timezone::end': }
 
-  Anchor['timezone::begin'] ->
-  Class['timezone::install'] ->
-  Class['timezone::config']
+  Anchor['timezone::begin']
+  -> Class['timezone::install']
+  -> Class['timezone::config']
 }

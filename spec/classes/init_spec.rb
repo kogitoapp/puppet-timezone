@@ -14,6 +14,7 @@ describe 'timezone', type: :class do
       let :facts do
         facts
       end
+
       options = os_specific_options(facts)
       context 'with all defaults' do
         it { is_expected.to contain_class('timezone') }
@@ -42,6 +43,7 @@ describe 'timezone', type: :class do
             manage_package: true
           }
         end
+
         it { is_expected.to contain_package('timezone-awesomerrr').with_ensure('present') }
       end
 
@@ -51,11 +53,17 @@ describe 'timezone', type: :class do
             manage_package: false
           }
         end
+
         it { is_expected.not_to contain_package(options[:package]) }
       end
 
       context 'when manage_package is true' do
-        let(:params) { { manage_package: true } }
+        let :params do
+          {
+            manage_package: true
+          }
+        end
+
         it { is_expected.to contain_package(options[:package]).with_ensure('present') }
       end
 

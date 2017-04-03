@@ -6,6 +6,7 @@ describe 'timezone::config', type: :class do
       let :facts do
         facts
       end
+
       options = os_specific_options(facts)
 
       context 'with all defaults when :osfamily == "Debian"' do

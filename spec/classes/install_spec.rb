@@ -6,6 +6,7 @@ describe 'timezone::install', type: :class do
       let :facts do
         facts
       end
+
       options = os_specific_options(facts)
 
       context 'with package_ensure => "absent"' do

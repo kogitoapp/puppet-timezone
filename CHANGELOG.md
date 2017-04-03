@@ -4,6 +4,7 @@
 
 *   Upgrade `stm-debconf` to 2.0.0
 *   Updated `rake test` to run all checks
+*   Resolved Rubocop warnings
 
 ## (2017-03-23) Release 1.1.5
 
