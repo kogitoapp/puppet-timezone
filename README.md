@@ -1,7 +1,6 @@
 # puppet-timezone
 
 [![Build Status][build-shield]][build-status]
-[![Code Coverage][coverage-shield]][coverage-status]
 [![Puppet Forge][forge-shield]][forge-timezone]
 [![Puppet Forge - downloads][forge-shield-dl]][forge-timezone]
 [![Puppet Forge - scores][forge-shield-sc]][forge-timezone]
@@ -162,8 +161,6 @@ test cases and syntax checks pass.
 
 [build-status]: https://travis-ci.org/kogitoapp/puppet-timezone
 [build-shield]: https://travis-ci.org/kogitoapp/puppet-timezone.png?branch=master
-[coverage-shield]: https://coveralls.io/repos/github/kogitoapp/puppet-timezone/badge.svg?branch=master
-[coverage-status]: https://coveralls.io/github/kogitoapp/puppet-timezone
 [forge-timezone]: https://forge.puppetlabs.com/kogitoapp/timezone
 [forge-shield]: https://img.shields.io/puppetforge/v/kogitoapp/timezone.svg
 [forge-shield-dl]: https://img.shields.io/puppetforge/dt/kogitoapp/timezone.svg
