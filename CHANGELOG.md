@@ -1,5 +1,8 @@
 ## (NOT YET RELEASE) Release 1.2.0
 
+DEPRECATION: `timezone::params` is deprecated, and will be removed in version
+2.0.0 in favor of supporting Hiera data.
+
 ### Maintenance
 
 *   Upgrade `stm-debconf` to 2.0.0
