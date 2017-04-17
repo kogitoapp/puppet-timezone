@@ -33,23 +33,23 @@
 # Copyright 2016 Daniel S. Reichenbach <https://kogitoapp.com>
 #
 class timezone (
-  $timezone                = $timezone::params::timezone,
-  $hw_utc                  = $timezone::params::hw_utc,
+  $timezone,
+  $hw_utc,
 
-  $package_ensure          = $timezone::params::package_ensure,
-  $package_name            = $timezone::params::package_name,
-  $package_provider        = $timezone::params::package_provider,
-  $package_install_options = $timezone::params::package_install_options,
-  $manage_package          = $timezone::params::manage_package,
+  $package_ensure,
+  $package_name,
+  $package_provider,
+  $package_install_options,
+  $manage_package,
 
-  $zoneinfo_dir            = $timezone::params::zoneinfo_dir,
-  $localtime_file          = $timezone::params::localtime_file,
-  $localtime_file_type     = $timezone::params::localtime_file_type,
-  $timezone_file           = $timezone::params::timezone_file,
-  $timezone_file_template  = $timezone::params::timezone_file_template,
-  $timezone_file_comments  = $timezone::params::timezone_file_comments,
-  $timezone_update         = $timezone::params::timezone_update,
-  ) inherits timezone::params {
+  $zoneinfo_dir,
+  $localtime_file,
+  $localtime_file_type,
+  $timezone_file,
+  $timezone_file_template,
+  $timezone_file_comments,
+  $timezone_update,
+  ) {
 
   class { '::timezone::install':
     package_install_options => $package_install_options,

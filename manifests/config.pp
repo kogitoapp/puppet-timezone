@@ -100,7 +100,7 @@ class timezone::config (
     }
   }
 
-  if $timezone_update != false and $localtime_ensure != 'absent'{
+  if $timezone_update != false and $timezone_update != '' and $localtime_ensure != 'absent'{
     exec { 'update_timezone':
       command     => $timezone_update,
       path        => '/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin',
