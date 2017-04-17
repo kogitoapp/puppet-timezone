@@ -17,8 +17,6 @@ matrix:
   - rvm: 2.3.4
     env: CHECK=build DEPLOY_TO_FORGE=yes
   - rvm: 2.3.4
-    env: CHECK=rubocop
-  - rvm: 2.3.4
     env: CHECK=test
   - rvm: 2.4.1
     env: CHECK=test
