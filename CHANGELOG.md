@@ -3,6 +3,7 @@
 ### Bug fixes
 
 *   Switch to git over HTTPS for test fixtures
+*   install `locales` package for testing Ubuntu 16.04
 
 ## (2017-04-18) Release 2.0.0
 
