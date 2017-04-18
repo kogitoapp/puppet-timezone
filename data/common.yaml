@@ -1,0 +1,15 @@
+---
+timezone::timezone: 'Etc/UTC'
+timezone::hw_utc: true
+timezone::package_ensure: 'present'
+timezone::manage_package: true
+timezone::package_name: 'tzdata'
+timezone::package_provider: ''
+timezone::package_install_options: []
+timezone::zoneinfo_dir: '/usr/share/zoneinfo/'
+timezone::localtime_file: '/etc/localtime'
+timezone::localtime_file_type: 'file'
+timezone::timezone_file: '/etc/timezone'
+timezone::timezone_file_template: 'timezone/timezone.erb'
+timezone::timezone_file_comments: false
+timezone::timezone_update: ''

@@ -1,3 +1,10 @@
+## (NOT YET RELEASE) Release 2.0.0
+
+### New features
+
+*   BC break: use Hiera for module data. `timezone::params` is gone, and fact
+    reliant configuration is done via `data` directory using Hiera files.
+
 ## (2017-04-05) Release 1.2.0
 
 DEPRECATION: `timezone::params` is deprecated, and will be removed in version

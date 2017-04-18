@@ -1,14 +1,6 @@
 require 'spec_helper'
 
 describe 'timezone', type: :class do
-  context 'on non supported operating systems' do
-    let(:facts) { { osfamily: 'foo', operatingsystem: 'bar' } }
-
-    it 'fails' do
-      is_expected.to compile.and_raise_error(%r{Unsupported platform: foo/bar})
-    end
-  end
-
   on_supported_os.each do |os, facts|
     context "on #{os} " do
       let :facts do
@@ -18,7 +10,6 @@ describe 'timezone', type: :class do
       options = os_specific_options(facts)
       context 'with all defaults' do
         it { is_expected.to contain_class('timezone') }
-        it { is_expected.to contain_class('timezone::params') }
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_anchor('timezone::begin') }
         it { is_expected.to contain_anchor('timezone::end') }

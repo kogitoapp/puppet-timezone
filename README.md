@@ -89,18 +89,6 @@ class { 'timezone':
 }
 ```
 
-### Class: `timezone::params`
-
-```puppet
-class { 'timezone::params':
-    timezone                => 'Etc/UTC',
-    hw_utc                  => true,
-    package_ensure          => 'latest',
-    package_install_options => [],
-    manage_package          => true,
-}
-```
-
 ### Class: `timezone::install`
 
 ```puppet

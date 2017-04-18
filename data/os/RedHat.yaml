@@ -1,0 +1,11 @@
+---
+timezone::package_name: 'tzdata'
+timezone::package_provider: 'yum'
+timezone::package_install_options: []
+timezone::zoneinfo_dir: '/usr/share/zoneinfo/'
+timezone::localtime_file: '/etc/localtime'
+timezone::localtime_file_type: 'file'
+timezone::timezone_file: '/etc/sysconfig/clock'
+timezone::timezone_file_template: 'timezone/clock.erb'
+timezone::timezone_file_comments: false
+timezone::timezone_update: 'tzdata-update'
