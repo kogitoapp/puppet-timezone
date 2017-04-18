@@ -1,3 +1,9 @@
+## (2014-04-18) 2.0.2
+
+### Bug fixes
+
+*   Fixed rubocop issue
+
 ## (2014-04-18) 2.0.1
 
 ### Maintenance

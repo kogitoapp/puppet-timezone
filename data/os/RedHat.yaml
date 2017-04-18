@@ -6,6 +6,6 @@ timezone::zoneinfo_dir: '/usr/share/zoneinfo/'
 timezone::localtime_file: '/etc/localtime'
 timezone::localtime_file_type: 'link'
 timezone::timezone_file: false
-timezone::timezone_file_template: false
+timezone::timezone_file_template: ''
 timezone::timezone_file_comments: false
 timezone::timezone_update: "timedatectl set-timezone %{::timezone::timezone}"

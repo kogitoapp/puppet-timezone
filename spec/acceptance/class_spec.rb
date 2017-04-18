@@ -21,6 +21,5 @@ describe 'timezone class' do
       it { is_expected.to be_file }
       it { is_expected.to contain 'Etc/UTC' }
     end
-
   end
 end
