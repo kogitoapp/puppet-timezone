@@ -5,6 +5,10 @@
 *   BC break: use Hiera for module data. `timezone::params` is gone, and fact
     reliant configuration is done via `data` directory using Hiera files.
 
+### Maintenance
+
+*   Updated beaker node sets
+
 ## (2017-04-05) Release 1.2.0
 
 DEPRECATION: `timezone::params` is deprecated, and will be removed in version
