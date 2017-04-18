@@ -1,3 +1,9 @@
+## (NOT YET RELEASED) 2.0.1
+
+### Bug fixes
+
+*   Switch to git over HTTPS for test fixtures
+
 ## (2017-04-18) Release 2.0.0
 
 ### New features
