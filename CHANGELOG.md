@@ -1,5 +1,9 @@
 ## (NOT YET RELEASED) 2.0.1
 
+### Maintenance
+
+*   Extended acceptance tests to cover default behavior
+
 ### Bug fixes
 
 *   Switch to git over HTTPS for test fixtures
