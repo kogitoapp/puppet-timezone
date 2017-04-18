@@ -1,4 +1,4 @@
-## (NOT YET RELEASE) Release 2.0.0
+## (2017-04-18) Release 2.0.0
 
 ### New features
 
