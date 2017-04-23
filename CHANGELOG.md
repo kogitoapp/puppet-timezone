@@ -1,3 +1,9 @@
+## (2014-04-23) 2.0.3
+
+### Bug fixes
+
+*   Fixed acceptance test
+
 ## (2014-04-23) 2.0.2
 
 ### Bug fixes
