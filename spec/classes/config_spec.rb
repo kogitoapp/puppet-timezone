@@ -53,7 +53,7 @@ describe 'timezone::config', type: :class do
           }
         end
 
-        if facts[:osfamily] == 'RedHat' && facts[:operatingsystemmajrelease] <= '6'
+        if facts[:osfamily] == 'RedHat' && facts[:operatingsystemmajrelease] == '6'
           it do
             is_expected.to contain_file(options[:localtime_file]).with(
               ensure: options[:localtime_file_type],
@@ -88,7 +88,6 @@ describe 'timezone::config', type: :class do
               target: options[:zoneinfo_dir] + options[:default_timezone]
             )
           end
-          it { is_expected.not_to contain_file(options[:timezone_file]).with_ensure('file') }
           it { is_expected.to contain_exec('update_timezone').with_command('timedatectl set-timezone Etc/UTC') }
         end
       end

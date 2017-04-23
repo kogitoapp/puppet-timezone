@@ -1,7 +1,8 @@
-## (2014-04-18) 2.0.2
+## (2014-04-23) 2.0.2
 
 ### Bug fixes
 
+*   Fixed tests RedHat OS family
 *   Fixed rubocop issue
 
 ## (2014-04-18) 2.0.1

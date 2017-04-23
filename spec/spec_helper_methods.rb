@@ -1,18 +1,47 @@
 def os_specific_options(facts)
   case facts[:osfamily]
   when 'RedHat'
-    {
-      package: 'tzdata',
-      package_provider: 'yum',
-      default_timezone: 'Etc/UTC',
-      zoneinfo_dir: '/usr/share/zoneinfo/',
-      localtime_file: '/etc/localtime',
-      localtime_file_type: 'link',
-      timezone_file: false,
-      timezone_file_template: '',
-      timezone_file_comments: false,
-      timezone_update: 'timedatectl set-timezone Etc/UTC'
-    }
+    case facts[:operatingsystemmajrelease]
+    when '24'
+      {
+        package: 'tzdata',
+        package_provider: 'yum',
+        default_timezone: 'Etc/UTC',
+        zoneinfo_dir: '/usr/share/zoneinfo/',
+        localtime_file: '/etc/localtime',
+        localtime_file_type: 'link',
+        timezone_file: false,
+        timezone_file_template: '',
+        timezone_file_comments: false,
+        timezone_update: 'timedatectl set-timezone Etc/UTC'
+      }
+    when '6'
+      {
+        package: 'tzdata',
+        package_provider: 'yum',
+        default_timezone: 'Etc/UTC',
+        zoneinfo_dir: '/usr/share/zoneinfo/',
+        localtime_file: '/etc/localtime',
+        localtime_file_type: 'file',
+        timezone_file: '/etc/sysconfig/clock',
+        timezone_file_template: 'timezone/clock.erb',
+        timezone_file_comments: true,
+        timezone_update: 'tzdata-update'
+      }
+    else
+      {
+        package: 'tzdata',
+        package_provider: 'yum',
+        default_timezone: 'Etc/UTC',
+        zoneinfo_dir: '/usr/share/zoneinfo/',
+        localtime_file: '/etc/localtime',
+        localtime_file_type: 'link',
+        timezone_file: false,
+        timezone_file_template: '',
+        timezone_file_comments: false,
+        timezone_update: 'timedatectl set-timezone Etc/UTC'
+      }
+    end
   when 'Debian'
     {
       package: 'tzdata',
