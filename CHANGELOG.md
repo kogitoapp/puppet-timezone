@@ -1,3 +1,9 @@
+## (NOT YET RELEASE) 2.0.5
+
+### Maintenance
+
+*   Updated Travis build settings
+
 ## (2017-05-02) 2.0.4
 
 ### Bug fixes
