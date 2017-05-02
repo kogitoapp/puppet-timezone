@@ -1,4 +1,4 @@
-## (NOT YET RELEASED) 2.0.4
+## (2017-05-02) 2.0.4
 
 ### Bug fixes
 
