@@ -1,17 +1,24 @@
-## (2014-04-23) 2.0.3
+## (NOT YET RELEASED) 2.0.4
+
+### Bug fixes
+
+*   Removed deprecated `data_provider` setting from metadata as we have a Hiera
+    version 5 configuration.
+
+## (2017-04-23) 2.0.3
 
 ### Bug fixes
 
 *   Fixed acceptance test
 
-## (2014-04-23) 2.0.2
+## (2017-04-23) 2.0.2
 
 ### Bug fixes
 
 *   Fixed tests RedHat OS family
 *   Fixed rubocop issue
 
-## (2014-04-18) 2.0.1
+## (2017-04-18) 2.0.1
 
 ### Maintenance
 
