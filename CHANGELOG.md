@@ -1,3 +1,9 @@
+## (2017-07-13) 2.1.0
+
+### Maintenance
+
+*   Updated dependencies for `puppet-apt` and `puppet-yum`
+
 ## (2017-05-02) 2.0.5
 
 ### Maintenance
