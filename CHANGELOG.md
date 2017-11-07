@@ -4,6 +4,10 @@
 
 *   set a fixed version for Rubocop gem
 
+### Maintenance
+
+*   Added Debian Stretch support
+
 ## (2017-07-13) 2.1.0
 
 ### Maintenance
