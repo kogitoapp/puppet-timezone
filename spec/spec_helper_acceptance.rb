@@ -15,7 +15,6 @@ RSpec.configure do |c|
     puppet_module_install(source: proj_root, module_name: 'timezone')
     hosts.each do |host|
       on host, puppet('module', 'install', 'puppetlabs-stdlib'), acceptable_exit_codes: [0]
-      on host, puppet('module', 'install', 'puppet-yum'), acceptable_exit_codes: [0]
       on host, puppet('module', 'install', 'puppetlabs-apt'), acceptable_exit_codes: [0]
       on host, puppet('module', 'install', 'stm-debconf'), acceptable_exit_codes: [0]
     end

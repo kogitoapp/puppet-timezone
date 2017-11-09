@@ -26,7 +26,6 @@ facilities with just a single parameter.
     install the `tzdata` package.
 *   `puppet-timezone` depends on
     *   [puppetlabs-stdlib][puppetlabs-stdlib],
-    *   [puppet-yum][puppet-yum],
     *   [puppetlabs-apt][puppetlabs-apt],
     *   [stm-debconf][stm-debconf],
 
@@ -142,7 +141,6 @@ test cases and syntax checks pass.
 
 [puppetlabs-stdlib]: https://github.com/puppetlabs/puppetlabs-stdlib
 [puppetlabs-apt]: https://github.com/puppetlabs/puppetlabs-apt
-[puppet-yum]: https://github.com/voxpupuli/puppet-yum
 [stm-debconf]: https://github.com/smoeding/puppet-debconf
 [valid-timezones]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [puppet-rspec]: http://rspec-puppet.com/

@@ -7,6 +7,7 @@
 ### Maintenance
 
 *   Added Debian Stretch support
+*   Removed dependency on `puppet-yum`
 
 ## (2017-07-13) 2.1.0
 
