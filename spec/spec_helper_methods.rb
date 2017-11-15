@@ -13,7 +13,7 @@ def os_specific_options(facts)
         timezone_file: false,
         timezone_file_template: '',
         timezone_file_comments: false,
-        timezone_update: 'timedatectl set-timezone Etc/UTC'
+        timezone_update: 'timedatectl set-timezone Etc/UTC',
       }
     when '6'
       {
@@ -26,7 +26,7 @@ def os_specific_options(facts)
         timezone_file: '/etc/sysconfig/clock',
         timezone_file_template: 'timezone/clock.erb',
         timezone_file_comments: true,
-        timezone_update: 'tzdata-update'
+        timezone_update: 'tzdata-update',
       }
     else
       {
@@ -39,7 +39,7 @@ def os_specific_options(facts)
         timezone_file: false,
         timezone_file_template: '',
         timezone_file_comments: false,
-        timezone_update: 'timedatectl set-timezone Etc/UTC'
+        timezone_update: 'timedatectl set-timezone Etc/UTC',
       }
     end
   when 'Debian'
@@ -53,7 +53,7 @@ def os_specific_options(facts)
       timezone_file: '/etc/timezone',
       timezone_file_template: 'timezone/timezone.erb',
       timezone_file_comments: false,
-      timezone_update: 'dpkg-reconfigure -f noninteractive tzdata'
+      timezone_update: 'dpkg-reconfigure -f noninteractive tzdata',
     }
   else
     {
@@ -66,7 +66,7 @@ def os_specific_options(facts)
       timezone_file: '/etc/timezone',
       timezone_file_template: 'timezone/timezone.erb',
       timezone_file_comments: true,
-      timezone_update: false
+      timezone_update: false,
     }
   end
 end

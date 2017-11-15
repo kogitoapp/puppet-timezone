@@ -15,19 +15,19 @@ facilities with just a single parameter.
 
 ### What timezone affects
 
-*   Locale timezone configuration file. For all supported systems this is
-    `/etc/localtime`.
-*   The timezone configuration file. Depending on the operating system this can
-    be:
-    *   `/etc/timezone` for the **Debian/Ubuntu** operating system family,
-    *   `/etc/sysconfig/clock` for **CentOS/RedHat** operating system family
-        below version **7**,
-*   For **Debian/Ubuntu**, **CentOS/RedHat** operating system families it will
-    install the `tzdata` package.
-*   `puppet-timezone` depends on
-    *   [puppetlabs-stdlib][puppetlabs-stdlib],
-    *   [puppetlabs-apt][puppetlabs-apt],
-    *   [stm-debconf][stm-debconf],
+- Locale timezone configuration file. For all supported systems this is
+  `/etc/localtime`.
+- The timezone configuration file. Depending on the operating system this can
+  be:
+  - `/etc/timezone` for the **Debian/Ubuntu** operating system family,
+  - `/etc/sysconfig/clock` for **CentOS/RedHat** operating system family
+    below version **7**,
+- For **Debian/Ubuntu**, **CentOS/RedHat** operating system families it will
+  install the `tzdata` package.
+- `puppet-timezone` depends on
+  - [puppetlabs-stdlib][puppetlabs-stdlib],
+  - [puppetlabs-apt][puppetlabs-apt],
+  - [stm-debconf][stm-debconf],
 
 ### Beginning with timezone
 
@@ -131,9 +131,9 @@ This project contains tests for [rspec-puppet][puppet-rspec].
 Quickstart:
 
 ```bash
-$ gem install bundler
-$ bundle install
-$ bundle exec rake test
+gem install bundler
+bundle install
+bundle exec rake test
 ```
 
 When submitting pull requests, please make sure that module documentation,

@@ -1,172 +1,156 @@
-## (NOT YET RELEASED) Release 2.1.1
+# Changelog
 
-### Bug fixes
+All notable changes to this project will be documented in this file.
 
-*   set a fixed version for Rubocop gem
+## Release 2.1.1 (2017-11-15)
 
-### Maintenance
+With this release, ownership of this module is transfered to Kogito UG,
+a DevOps / Infrastructure services business in Berlin, Germany.
 
-*   Added Debian Stretch support
-*   Removed dependency on `puppet-yum`
+**Features**
 
-## (2017-07-13) 2.1.0
+- Upgrade default Minio installation to a more recent version
+- Base URL for Minio downloads can now be pointed to a custom location
+- Converted module to be Puppet Development Kit compatible
+- Added support for Debian 9 (Stretch)
+- Updated Puppet requirements to be in line with PE lifecycle
+- **API**: `sorted_json(...)` function has been converted to a Puppet 4 style
+  function and renamed to `to_sorted_json(...)`
 
-### Maintenance
+## Release 2.1.0 (2017-07-13)
 
-*   Updated dependencies for `puppet-apt` and `puppet-yum`
+**Features**
 
-## (2017-05-02) 2.0.5
+- Allow usage for newer versions of `puppet-apt` and `puppet-yum`
 
-### Maintenance
+## Release 2.0.5 (2017-05-02)
 
-*   Updated Travis build settings
+**Bugfixes**
 
-## (2017-05-02) 2.0.4
+- Updated Travis CI configuration
 
-### Bug fixes
+## Release 2.0.4 (2017-05-02)
 
-*   Removed deprecated `data_provider` setting from metadata as we have a Hiera
-    version 5 configuration.
+**Bugfixes**
 
-## (2017-04-23) 2.0.3
+- Removed `data_provider` from module metadata
 
-### Bug fixes
+## Release 2.0.3 (2017-04-23)
 
-*   Fixed acceptance test
+**Bugfixes**
 
-## (2017-04-23) 2.0.2
+- Fixed acceptance test
 
-### Bug fixes
+## Release 2.0.2 (2017-04-23)
 
-*   Fixed tests RedHat OS family
-*   Fixed rubocop issue
+**Bugfixes**
 
-## (2017-04-18) 2.0.1
+- Fixed tests RedHat OS family
+- Fixed rubocop issue
 
-### Maintenance
+## Release 2.0.1 (2017-04-18)
 
-*   Extended acceptance tests to cover default behavior
+**Bugfixes**
 
-### Bug fixes
+- Switch to git over HTTPS for test fixtures
+- Added `locales` package for testing Ubuntu 16.04
 
-*   Switch to git over HTTPS for test fixtures
-*   install `locales` package for testing Ubuntu 16.04
+## Release 2.0.0 (2017-04-18)
 
-## (2017-04-18) Release 2.0.0
+**Features**
 
-### New features
+- Replaced `timezone::params` with Hiera data
+- Updated Beaker node sets
 
-*   BC break: use Hiera for module data. `timezone::params` is gone, and fact
-    reliant configuration is done via `data` directory using Hiera files.
+## Release 1.2.0 (2017-04-05)
 
-### Maintenance
+This release prepares the module for switching over to Hiera data instead of the
+old way of `timezone::params`.
 
-*   Updated beaker node sets
+**Features**
 
-## (2017-04-05) Release 1.2.0
+- Upgrade `stm-debconf` to 2.0.0
+- Updated `rake test` to run all checks
+- Resolved Rubocop warnings
+- Updated Travis build to use Ruby 2.3/2.4 only
 
-DEPRECATION: `timezone::params` is deprecated, and will be removed in version
-2.0.0 in favor of supporting Hiera data.
+## Release 1.1.5 (2017-03-23)
 
-### Maintenance
+**Bugfixes**
 
-*   Upgrade `stm-debconf` to 2.0.0
-*   Updated `rake test` to run all checks
-*   Resolved Rubocop warnings
-*   Updated Travis build to use Ruby 2.3/2.4 only
+- Removed unsupported "pe" version requirement
 
-## (2017-03-23) Release 1.1.5
+## Release 1.1.4 (2017-03-23)
 
-### Bug fixes
+**Bugfixes**
 
-*   Removed unsupported "pe" version requirement.
+- Fixed deprecation warning about `data_provider`.
 
-## (2017-03-23) Release 1.1.4
+## Release 1.1.3 (2017-02-15)
 
-### Bug fixes
+**Bugfixes**
+- Fixed Rubocop offenses. Sorry, we offended you!
+  - use `YAML.safe_load` instead of `YAML.load`
+  - use `Security/Eval` instead of `Lint/Eval` check
+- Fixed specs to avoid nested groups.
+- Added missing note about using `rubocop` to README.
 
-*   Fixed deprecation warning about `data_provider`.
+## Release 1.1.2 (2017-02-15)
 
-## (2017-02-15) Release 1.1.3
+**Bugfixes**
 
-### Bug fixes
+- Fixed Rubocop configuration
+- Fixed wrong version in module metadata
 
-*   Fixed Rubocop offenses. Sorry, we offended you!
-    -   use `YAML.safe_load` instead of `YAML.load`
-    -   use `Security/Eval` instead of `Lint/Eval` check
-*   Fixed specs to avoid nested groups.
-*   Added note about using `rubocop` to README.
+## Release 1.1.1 (2017-02-15)
 
-## (2017-02-15) Release 1.1.2
+**Features**
 
-### Bug fixes
+- Upgrade puppet-yum to version 1.0.0
 
-*   Fixed Rubocop configuration
-*   Fixed wrong version in module metadata
+## Release 1.1.0 (2016-12-28)
 
-## (2017-02-15) Release 1.1.1
+**Features**
 
-### Maintenance
+- Integrate [stm-debconf](https://github.com/smoeding/puppet-debconf) for
+  Debian operating system family.
+  This fixes [#1](https://github.com/kogitoapp/puppet-timezone/issues/1).
+- Use file or link resources for `localtime` as expected on target `osfamily`.
+  This fixes [#2](https://github.com/kogitoapp/puppet-timezone/issues/2).
 
-*   Updated dependecy to puppet-yum 1.0.0
+## Release 1.0.5 (2016-12-28)
 
-## (2016-12-28) Release 1.1.0
+**Features**
 
-### New features
+- Removed DEBUG mode for Beaker builds.
+- Removed Ruby 2.4.0 build from Travis.
+- Added required Puppet Open Source and Puppet Enterprise versions. Rule of
+  thumb: if it supports Puppet 4.0 language features, it has to run.
 
-*   Integrate [stm-debconf](https://github.com/smoeding/puppet-debconf) for
-    Debian operating system family.
-    This fixes [#1](https://github.com/kogitoapp/puppet-timezone/issues/1).
-*   Use file or link resources for `localtime` as expected on target `osfamily`.
-    This fixes [#2](https://github.com/kogitoapp/puppet-timezone/issues/2).
+## Release 1.0.4 (2016-12-27)
 
-## (2016-12-28) Release 1.0.5
+**Features**
 
-### Maintenance
+- Send code coverage reports to [Coveralls](https://coveralls.io/github/kogitoapp/puppet-timezone).
 
-*   Removed DEBUG mode for Beaker builds.
-*   Removed Ruby 2.4.0 build from Travis.
-*   Added required Puppet Open Source and Puppet Enterprise versions. Rule of
-    thumb: if it supports Puppet 4.0 language features, it has to run.
+## Release 1.0.3 (2016-12-27)
 
-## 2016-12-27 Release 1.0.4
+**Bugfixes**
 
-### Bug fixes
+- Ignore `vendor` directory when creating release packages for Puppet Forge
 
-*   Enable code coverage reports to [Coveralls](https://coveralls.io/github/kogitoapp/puppet-timezone).
+## Release 1.0.2 (2016-12-27)
 
-## 2016-12-27 Release 1.0.3
+**Bugfixes**
 
-### Bug fixes
+- Fixed Puppet Forge configuration to enable automated builds
 
-*   Ignore `vendor` directory to reduce size of releases submitted to Puppet
-    Forge.
+## Release 1.0.1 (2016-12-27)
 
-## 2016-12-27 Release 1.0.2
+**Features**
 
-### Bug fixes
+- Test release for automated builds via Travis CI
 
-*   Correct Puppet Forge metadata
+## Release 1.0.0 (2016-12-26)
 
-## 2016-12-27 Release 1.0.1
-
-### Maintenance
-
-*   Test release for TravisCI builds.
-
-## 2016-12-26 Release 1.0.0
-
-Initial release of timezone management module! Hurra!
-
-### New features
-
-*   support package and configuration of timezone on Debian, Ubuntu, CentOS,
-    RHEL, and Fedora
-
-### Bug fixes
-
-*   ... nothing yet!
-
-### Maintenance
-
-*   ... adding in Travis CI build settings and Puppet Forge deployment.
+Initial release of timezone settings module. Hello, World!

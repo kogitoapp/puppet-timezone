@@ -21,7 +21,7 @@ describe 'timezone::config', type: :class do
             timezone_file: options[:timezone_file],
             timezone_file_template: options[:timezone_file_template],
             timezone_file_comments: options[:timezone_file_comments],
-            timezone_update: options[:timezone_update]
+            timezone_update: options[:timezone_update],
           }
         end
 
@@ -29,7 +29,7 @@ describe 'timezone::config', type: :class do
           it do
             is_expected.to contain_file(options[:localtime_file]).with(
               ensure: options[:localtime_file_type],
-              source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone]
+              source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone],
             )
           end
           it { is_expected.to contain_file(options[:timezone_file]).with_content(%r{Etc/UTC}) }
@@ -49,7 +49,7 @@ describe 'timezone::config', type: :class do
             timezone_file: options[:timezone_file],
             timezone_file_template: options[:timezone_file_template],
             timezone_file_comments: options[:timezone_file_comments],
-            timezone_update: options[:timezone_update]
+            timezone_update: options[:timezone_update],
           }
         end
 
@@ -57,7 +57,7 @@ describe 'timezone::config', type: :class do
           it do
             is_expected.to contain_file(options[:localtime_file]).with(
               ensure: options[:localtime_file_type],
-              source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone]
+              source: 'file://' + options[:zoneinfo_dir] + options[:default_timezone],
             )
           end
           it { is_expected.to contain_file(options[:timezone_file]).with_content(%r{ZONE="Etc/UTC"}) }
@@ -77,7 +77,7 @@ describe 'timezone::config', type: :class do
             timezone_file: options[:timezone_file],
             timezone_file_template: options[:timezone_file_template],
             timezone_file_comments: options[:timezone_file_comments],
-            timezone_update: options[:timezone_update]
+            timezone_update: options[:timezone_update],
           }
         end
 
@@ -85,7 +85,7 @@ describe 'timezone::config', type: :class do
           it do
             is_expected.to contain_file(options[:localtime_file]).with(
               ensure: options[:localtime_file_type],
-              target: options[:zoneinfo_dir] + options[:default_timezone]
+              target: options[:zoneinfo_dir] + options[:default_timezone],
             )
           end
           it { is_expected.to contain_exec('update_timezone').with_command('timedatectl set-timezone Etc/UTC') }
@@ -104,7 +104,7 @@ describe 'timezone::config', type: :class do
             timezone_file: options[:timezone_file],
             timezone_file_template: options[:timezone_file_template],
             timezone_file_comments: options[:timezone_file_comments],
-            timezone_update: options[:timezone_update]
+            timezone_update: options[:timezone_update],
           }
         end
 
@@ -123,7 +123,7 @@ describe 'timezone::config', type: :class do
             timezone_file: options[:timezone_file],
             timezone_file_template: options[:timezone_file_template],
             timezone_file_comments: options[:timezone_file_comments],
-            timezone_update: options[:timezone_update]
+            timezone_update: options[:timezone_update],
           }
         end
 
@@ -131,7 +131,7 @@ describe 'timezone::config', type: :class do
           it do
             is_expected.to contain_file(options[:localtime_file]).with(
               ensure: options[:localtime_file_type],
-              source: 'file://' + options[:zoneinfo_dir] + 'Europe/Berlin'
+              source: 'file://' + options[:zoneinfo_dir] + 'Europe/Berlin',
             )
           end
         end
@@ -139,7 +139,7 @@ describe 'timezone::config', type: :class do
           it do
             is_expected.to contain_file(options[:localtime_file]).with(
               ensure: options[:localtime_file_type],
-              target: options[:zoneinfo_dir] + 'Europe/Berlin'
+              target: options[:zoneinfo_dir] + 'Europe/Berlin',
             )
           end
         end

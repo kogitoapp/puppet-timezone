@@ -17,7 +17,7 @@ describe 'timezone::install', type: :class do
             package_provider: options[:package_provider],
             package_install_options: [],
             manage_package: true,
-            timezone: options[:default_timezone]
+            timezone: options[:default_timezone],
           }
         end
 
@@ -33,7 +33,7 @@ describe 'timezone::install', type: :class do
               package_provider: 'apt',
               package_install_options: [],
               manage_package: true,
-              timezone: options[:default_timezone]
+              timezone: options[:default_timezone],
             }
           end
 
@@ -52,7 +52,7 @@ describe 'timezone::install', type: :class do
               package_provider: 'yum',
               package_install_options: [],
               manage_package: true,
-              timezone: options[:default_timezone]
+              timezone: options[:default_timezone],
             }
           end
 
