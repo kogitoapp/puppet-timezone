@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 3.0.0 (NOT YET RELEASED)
+
+**Features**
+
+- [Puppet Development Kit](https://puppet.com/download-puppet-development-kit)
+  is now the base for this Puppet module. `pdk validate` and `pdk test unit`
+  replace previous `bundle exec ...` calls
+
 ## Release 2.1.1 (2017-11-15)
 
 With this release, ownership of this module is transfered to Kogito UG,

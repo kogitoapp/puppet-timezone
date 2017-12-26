@@ -3,50 +3,26 @@ dist: trusty
 language: ruby
 cache: bundler
 before_install:
-  - bundle -v
-  - rm Gemfile.lock || true
-  - gem update --system
-  - gem update bundler
-  - gem --version
-  - bundle -v
+- bundle -v
+- rm Gemfile.lock || true
+- gem update --system
+- gem update bundler
+- gem --version
+- bundle -v
 script:
-  - bundle exec rake $CHECK
+- bundle exec rake $CHECK
+bundler_args: "--without system_tests"
+rvm:
+- 2.4.1
+- 2.1.9
+env:
+- PUPPET_GEM_VERSION="~> 4.0" CHECK=spec
 matrix:
   fast_finish: true
   include:
-  - rvm: 2.3.4
-    bundler_args: --without system_tests development
-    env: CHECK=test
-  - rvm: 2.4.1
-    bundler_args: --without system_tests development
-    env: CHECK=test
-  - rvm: 2.4.1
-    bundler_args: --without system_tests development
-    env: CHECK=build DEPLOY_TO_FORGE=yes
-  - rvm: 2.4.1
-    bundler_args: --without development
-    dist: trusty
-    env: PUPPET_INSTALL_TYPE=agent CHECK=beaker BEAKER_set=docker/centos-7
-    services: docker
-    sudo: required
-  - rvm: 2.4.1
-    bundler_args: --without development
-    dist: trusty
-    env: PUPPET_INSTALL_TYPE=agent CHECK=beaker BEAKER_set=docker/debian-8
-    services: docker
-    sudo: required
-  - rvm: 2.4.1
-    bundler_args: --without development
-    dist: trusty
-    env: PUPPET_INSTALL_TYPE=agent CHECK=beaker BEAKER_set=docker/ubuntu-14.04
-    services: docker
-    sudo: required
-  - rvm: 2.4.1
-    bundler_args: --without development
-    dist: trusty
-    env: PUPPET_INSTALL_TYPE=agent CHECK=beaker BEAKER_set=docker/ubuntu-16.04
-    services: docker
-    sudo: required
+  - env: CHECK=rubocop
+  - env: CHECK="syntax lint"
+  - env: CHECK=metadata_lint
 branches:
   only:
   - master
@@ -57,7 +33,7 @@ deploy:
   provider: puppetforge
   user: kogitoapp
   password:
-    secure: phtQ526yvKxZpdVl/XcoB4wp7zKeDuC3mbrJmgWOaxrLYA6T6UhMhjSUWSd9f7MMaXmxRogVw/RJTfXaxPfuzx+EHbuCOThoTDiJCLQZnjqLiqV477GOTjN7zQK+W2Nn/FmuwdVkKVQ1177xGVloQxzQMIoo3HWXXul38E556Mug6ys/TPFyahsCKm4C1gRq9euzWPxFhMhdiYYmRRCn04lm1GcVcF5avf1DhQof2dVklwbsH8L6Y3wCxeVINFNKh2DjPd13piUIjINJPn10HjQaIZK3uz9aAKOIB6EX6dEViiKLWwKD75iSY9tEeFYZKdr5hn02kQhUKus4Fg8ra0ovQciw+iLZb6S6uMS844C8+HIP8d/XAH5ay25hyJ1rrOHizkk1Sf4gZzf8yjc+ew0mhEjIQYY7cnQqWD/2pum0P3eh4LXa5Mqpvp7BJ+KQcmVZXHJkRmVLuUDMG1cCa6dBJXuQFDgS8AicrYtA9saqT/L5P7tTVMnALZosGczlet/0MBWST98ObUN2ZbQ3qNrbMuSm5ADxvpPCXfaI/RuM14jQfOVCCC5l6Od89j5NambGRimlHE8lsVfqz7JYbjfZ9EB2Wq5qHiMFaiORA50+gNy6YEBLA34sOAD49lvjQon3ApMPxrbwE2AgqBTCgzAXlhOZjdR2J6pwem61cLk=
+    secure: VcK3aTXYpAjQPqsFEzJroeDaHGuy9tAmZ9FofiKLjHJZxTH/OPvWRD9o2yePg7PHQnTl5WKofJ34MXicKFU6AzD4jPDg5IZxvE4PIMSpGTMtyNyIjE9FmwsoqrSEINIBFEohO0rOaVtDAuGq8KuO/3YovaI2pP5tYtrFxZogjzIbhyepWOTuEXTAfEbFG+MMcyd2HgkvlLo3tqikt442ZHv0tXT+6xafIpKlhhQvvjlTL+DOGSQ9qHM5YCdZcElMvilIg9c5GRLNtda/d9vSWOqObWT5WA+u7a7gYMNy/bnNnnO+IgnkuMdIafs9PbPwIFDdSlYGMXm5CMlIJq285MaS6xueHdLr3LH02NHC/iyOFMonzVzaq8TpiWuqfgWSsjHanJ5D83cmDwIvQ49mOW76QSS2jbaayzJV2r7CHmOS/f9pK5Py933tttsZyIYJ5jlRTgTI5gf1LHoPaUeHa4mBWE+8HhMt2sIYr39+AhypSxwFcoNiDIAtLGCZDKpK8wv84gZ0KksTvHd/OsURg7v/m/Yo7V/YTPnDDkoheW+JnnsRaJIA26NuLb5TN/4koOzOBEcSZsvI6j/5JyRNhCEViSq/omWLtUPAKS8Mw9T2a7ipGpP2afPEvSk3iEz8FUANFW/iK7DQ6KR3c1TNpW2Z/ReuunWaB6nFtWPP+eY=
   on:
     tags: true
     all_branches: true
