@@ -1,71 +1,71 @@
 {
-  "name": "kogitoapp-timezone",
-  "version": "2.1.1",
-  "author": "Kogito UG <brainz+puppet@kogitoapp.com>",
-  "summary": "A module to manage timezone settings",
-  "license": "Apache-2.0",
-  "source": "https://github.com/kogitoapp/puppet-timezone.git",
-  "project_page": "https://github.com/kogitoapp/puppet-timezone",
-  "issues_url": "https://github.com/kogitoapp/puppet-timezone/issues",
-  "dependencies": [
-    {
-      "name": "puppetlabs-stdlib",
-      "version_requirement": ">= 4.14.0 < 5.0.0"
-    },
-    {
-      "name": "puppetlabs-apt",
-      "version_requirement": ">= 2.3.0 < 5.0.0"
-    },
-    {
-      "name": "stm-debconf",
-      "version_requirement": ">= 2.0.0 < 3.0.0"
-    }
-  ],
-  "operatingsystem_support": [
-    {
-      "operatingsystem": "CentOS",
-      "operatingsystemrelease": [
-        "6",
-        "7"
-      ]
-    },
-    {
-      "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
-      "operatingsystem": "RedHat",
-      "operatingsystemrelease": [
-        "6",
-        "7"
-      ]
-    },
-    {
-      "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
-      "operatingsystem": "Debian",
-      "operatingsystemrelease": [
-        "8",
-        "9"
-      ]
-    },
-    {
-      "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [
-        "16.04"
-      ]
-    }
-  ],
-  "requirements": [
-    {
-      "name": "puppet",
-      "version_requirement": ">= 4.10.8 < 6.0.0"
-    }
-  ]
+    "name": "kogitoapp-timezone",
+    "version": "2.1.1",
+    "author": "Kogito UG <brainz+puppet@kogitoapp.com>",
+    "summary": "A module to manage timezone settings",
+    "license": "Apache-2.0",
+    "source": "https://github.com/kogitoapp/puppet-timezone.git",
+    "project_page": "https://github.com/kogitoapp/puppet-timezone",
+    "issues_url": "https://github.com/kogitoapp/puppet-timezone/issues",
+    "dependencies": [
+        {
+            "name": "puppetlabs-stdlib",
+            "version_requirement": ">= 4.14.0 < 6.0.0"
+        },
+        {
+            "name": "puppetlabs-apt",
+            "version_requirement": ">= 4.4.1 < 7.0.0"
+        },
+        {
+            "name": "stm-debconf",
+            "version_requirement": ">= 2.0.0 < 3.0.0"
+        }
+    ],
+    "operatingsystem_support": [
+        {
+            "operatingsystem": "CentOS",
+            "operatingsystemrelease": [
+                "6",
+                "7"
+            ]
+        },
+        {
+            "operatingsystem": "OracleLinux",
+            "operatingsystemrelease": [
+                "7"
+            ]
+        },
+        {
+            "operatingsystem": "RedHat",
+            "operatingsystemrelease": [
+                "6",
+                "7"
+            ]
+        },
+        {
+            "operatingsystem": "Scientific",
+            "operatingsystemrelease": [
+                "7"
+            ]
+        },
+        {
+            "operatingsystem": "Debian",
+            "operatingsystemrelease": [
+                "8",
+                "9"
+            ]
+        },
+        {
+            "operatingsystem": "Ubuntu",
+            "operatingsystemrelease": [
+                "16.04"
+            ]
+        }
+    ],
+    "requirements": [
+        {
+            "name": "puppet",
+            "version_requirement": ">= 4.10.8 < 6.0.0"
+        }
+    ]
 }
